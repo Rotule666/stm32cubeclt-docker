@@ -4,9 +4,10 @@ FROM ubuntu:jammy
 
 RUN apt-get -y update && \
     apt-get -y install wget && \
+    apt-get -y install zip &&\
 	apt-get -y install unzip && \
 	apt-get -y install tar && \
-	apt-get -y install curl&& \
+	apt-get -y install curl && \
     apt-get -y install git && \
     apt-get -y install ssh
 
@@ -30,11 +31,18 @@ RUN unzip "/tmp/en.st-stm32cubeclt*amd64.sh.zip" -d /tmp && \
 
 COPY patch/setup.patch /tmp/
 
+# Apply the patch to setup.sh
 RUN cd /tmp && \
     patch -p0 < setup.patch
 
+# Run the installer
 RUN chmod +x /tmp/setup.sh && \
     cd /tmp &&\
     ./setup.sh
 
+# Install vcpkg
+RUN cd /root &&\
+    /bin/bash -c ". <(curl https://aka.ms/vcpkg-init.sh -L)"
+
+# remove temporary files
 RUN rm -rf /tmp/*
