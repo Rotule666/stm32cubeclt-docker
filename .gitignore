@@ -1,4 +1,4 @@
 patch/setup.sh
 patch/setupOriginal.sh
-*.sh
-*.zip
+/*.sh
+/*.zip
