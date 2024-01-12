@@ -1,0 +1,4 @@
+patch/setup.sh
+patch/setupOriginal.sh
+*.sh
+*.zip

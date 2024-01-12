@@ -1,0 +1,53 @@
+--- setup.sh	2024-01-12 13:44:12.032741201 -0500
++++ setup.sh	2024-01-12 13:41:27.284684746 -0500
+@@ -7,25 +7,25 @@
+ 
+ chmod +x $thisdir/*.sh
+ 
+-# Ask user to agree on licenseà
+-$thisdir/prompt_linux_license.sh
+-if [ $? -ne 0 ]
+-then
+-	$thisdir/cleanup.sh
+-	exit 1
+-fi
++# Ask user to agree on license
++#$thisdir/prompt_linux_license.sh
++#if [ $? -ne 0 ]
++#then
++#	$thisdir/cleanup.sh
++#	exit 1
++#fi
+ export LICENSE_ALREADY_ACCEPTED=1
+ 
+ install_clt_as_root=
+ if [ "$(id -un)" = "root" ]; then
+ 	install_clt_as_root=1
+-else
+-	typeset -u answer
+-	read -p "Do you want to install STLinkServer and Udev rules for STLink? Without these packages, you will not be able to use debugging feature.
+-             Install them? (you need sudo permission to do that) [Y/n]" answer
+-	if [ ${answer:-Y} = "Y" ]; then
+-		install_debug=1
+-	fi
++#else
++	#typeset -u answer
++	#read -p "Do you want to install STLinkServer and Udev rules for STLink? Without these packages, you will not be able to use debugging feature.
++    #         Install them? (you need sudo permission to do that) [Y/n]" answer
++	#if [ ${answer:-Y} = "Y" ]; then
++	#	install_debug=1
++	#fi
+ fi
+ 
+ # Check what kind of sudo is available.
+@@ -77,8 +77,8 @@
+ 		while $response
+ 		do
+ 			installdir=$default_install_dir
+-			read -p "STM32CubeCLT install dir? [$installdir] " new_installdir
+-			installdir=${new_installdir:-$installdir}
++			#read -p "STM32CubeCLT install dir? [$installdir] " new_installdir
++			installdir=$installdir
+ 			if [ "$installdir" != "$default_install_dir" ];then
+ 				while true
+ 				do
