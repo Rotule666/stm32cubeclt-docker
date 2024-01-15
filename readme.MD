@@ -17,4 +17,26 @@ run the container
 docker run -it rotule666/st-stm32cubeclt bash
 ```
 
+run the container with a project
+```
+./run.sh $YOURPATH
+```
+The project is in /opt/project
 
+### build a stm32cube project
+
+for example, your project is in `~/stm32cube-vs-project`
+
+```
+./run.sh ~/stm32cube-vs-project
+
+cd /opt/project
+source vcpkg-init
+vcpkg activate
+
+# I have a preset named SKSB, modify this for your project
+cmake -DCMAKE_BUILD_TYPE=Debug -DPRESET_NAME=SKSB -DSK_SBMS=ON -DCMAKE_INSTALL_PREFIX=/opt/project/build/SKSB/install -DCMAKE_TOOLCHAIN_FILE:FILEPATH=/opt/project/cmake/gcc-arm-none-eabi.cmake -S/opt/project -B/opt/project/build/SKSB/build -G Ninja
+
+cmake --build /opt/project/build/SKSB/build
+
+```

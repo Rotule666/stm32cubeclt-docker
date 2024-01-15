@@ -44,5 +44,7 @@ RUN chmod +x /tmp/setup.sh && \
 RUN cd /root &&\
     /bin/bash -c ". <(curl https://aka.ms/vcpkg-init.sh -L)"
 
+RUN mkdir /opt/project
+
 # remove temporary files
 RUN rm -rf /tmp/*
